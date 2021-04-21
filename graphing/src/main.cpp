@@ -11,6 +11,11 @@
 #include "renderer/shader.h"
 #include "core/window.h"
 
+#include "events/event.h"
+#include "events/mouse_event.h"
+
+#include "events/event_handler.h"
+
 const char* vertexSource = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
     "void main()\n"
@@ -31,10 +36,21 @@ float vertices[] = {
         0.0f, 0.5f, 0.0f
 };
 
+void on_mouse_move(mouse_moved_event& e) {
+    LOG_INFO("Mouse moved: {0}, {1}", e.get_x(), e.get_y());
+}
+
+
+void on_event(event& e) {
+    event_handler handler(e);
+    handler.handle<mouse_moved_event>(on_mouse_move);
+}
+
 int main() {
     logger::init();
 
     window window("hello", 500, 500);
+    window.set_event_callback(on_event);
     shader basic_shader("basic", vertexSource, fragmentSource);
     vertex_array vao;
     std::shared_ptr<vertex_buffer> vbo = std::make_shared<vertex_buffer>(vertices, sizeof(vertices));
