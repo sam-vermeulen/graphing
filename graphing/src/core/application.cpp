@@ -29,6 +29,7 @@ void application::on_event(event& e) {
 void application::run() {
     while(m_running) {
         m_window->on_update();
+        on_update();
     }
 }
 

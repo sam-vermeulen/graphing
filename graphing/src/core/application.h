@@ -11,6 +11,8 @@ public:
 
     void on_event(event& e);
 
+    virtual void on_update() = 0;
+
     window& get_window() { return *m_window; }
 
     static application& get() { return *s_instance; }
