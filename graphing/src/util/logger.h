@@ -13,5 +13,5 @@ private:
 
 #define LOG_TRACE(...)  ::logger::get_logger()->trace(__VA_ARGS__)
 #define LOG_INFO(...)   ::logger::get_logger()->info(__VA_ARGS__)
-#define LOG_WARN(...)  ::logger::get_logger()->warn(__VA_ARGS__)
+#define LOG_WARN(...)   ::logger::get_logger()->warn(__VA_ARGS__)
 #define LOG_ERROR(...)  ::logger::get_logger()->error(__VA_ARGS__)

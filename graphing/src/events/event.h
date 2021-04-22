@@ -14,7 +14,5 @@ class event {
 public:
     virtual ~event() = default;
 
-    bool handled = false;
-
     virtual bool operator==(event_type type) const = 0;
 };

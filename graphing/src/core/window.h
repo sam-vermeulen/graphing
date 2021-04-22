@@ -12,7 +12,7 @@ class window {
 public:
     window(const std::string& title, uint32_t width, uint32_t height);
     ~window();
-    using event_callback_type = std::function<void(event&)>;
+    using event_callback_type = std::function<void(event&)>; 
 
     void on_update();
 

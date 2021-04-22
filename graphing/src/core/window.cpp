@@ -15,11 +15,7 @@ window::window(const std::string& title, uint32_t width, uint32_t height) {
     m_window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
     glfwMakeContextCurrent(m_window);
     int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-
-    initialize_callbacks();
-}
-
-void window::initialize_callbacks() {
+    
     glfwSetWindowUserPointer(m_window, &m_data);
 
     glfwSetWindowCloseCallback(m_window, [](GLFWwindow* window) {
@@ -121,7 +117,7 @@ void window::initialize_callbacks() {
 
         key_typed_event event(keycode);
         data.eventCallback(event);
-    })
+    });
 }
 
 window::~window() {
