@@ -2,6 +2,8 @@
 
 #include <glad/glad.h>
 
+#include "util/logger.h"
+
 vertex_buffer::vertex_buffer(uint32_t size) {
     glCreateBuffers(1, &m_id);
     glBindBuffer(GL_ARRAY_BUFFER, m_id);
@@ -16,6 +18,10 @@ vertex_buffer::vertex_buffer(float* vertices, uint32_t size) {
 
 vertex_buffer::~vertex_buffer() {
     glDeleteBuffers(1, &m_id);
+}
+
+void vertex_buffer::set_layout(std::initializer_list<buffer_element> layout) {
+    m_layout.insert(m_layout.begin(), layout.begin(), layout.end());
 }
 
 void vertex_buffer::bind() const {

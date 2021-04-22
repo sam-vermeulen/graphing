@@ -9,22 +9,26 @@
 
 const char* vertexSource = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
+    "layout (location = 1) in vec4 aColor;\n"
+    "out vec4 color;\n"
     "void main()\n"
     "{\n"
     "gl_Position = vec4(aPos, 1.0f);\n"
+    "color = aColor;"
     "}\0";
 
 const char* fragmentSource = "#version 330 core\n"
+    "in vec4 color;\n"
     "out vec4 FragColor;\n"
     "void main()\n"
     "{\n"
-    "FragColor = vec4(0.95f, 0.95f, 0.58f, 1.0f);\n"
+    "FragColor = color;\n"
     "}\0";
 
 float vertices[] = {
-    -0.5f, -0.5f, 0.0f,
-     0.5f, -0.5f, 0.0f,
-     0.0f, 0.5f, 0.0f
+    -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+     0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+     0.0f, 0.5f, 0.0f,  0.0f, 0.0f, 1.0f, 1.0f
 };
 
 class app : public application {
@@ -35,11 +39,12 @@ public:
 
         basic_shader = new shader("basic", vertexSource, fragmentSource);
         vbo = std::make_shared<vertex_buffer>(vertices, sizeof(vertices));
+        vbo->set_layout({
+            { data_type::float3, "aPos" },
+            { data_type::float4, "aColor" }
+        });
         vao.add_vbo(vbo);
         
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-
         glClearColor(0.3f, 0.8f, 0.9f, 1.0f);
     }
 
