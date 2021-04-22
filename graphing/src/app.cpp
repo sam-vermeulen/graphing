@@ -1,3 +1,4 @@
+/*
 #include "core/entry.h"
 #include "core/application.h"
 
@@ -62,7 +63,7 @@ private:
     shader* basic_shader;
 
 };
-
 application* create_application() {
     return new app();
 }
+*/
