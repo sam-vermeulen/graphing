@@ -2,7 +2,7 @@
 
 enum class event_type {
     none = 0,
-    window_close, window_resize, window_moved, window_focus, window_lose_focus,
+    window_close, window_resize, window_move, window_focus, window_lose_focus,
     key_pressed, key_released, key_typed,
     mouse_pressed, mouse_released, mouse_moved, mouse_scrolled
 };

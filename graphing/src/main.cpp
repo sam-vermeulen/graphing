@@ -51,18 +51,16 @@ int main() {
 
     window window("hello", 500, 500);
     window.set_event_callback(on_event);
+
     shader basic_shader("basic", vertexSource, fragmentSource);
     vertex_array vao;
-    std::shared_ptr<vertex_buffer> vbo = std::make_shared<vertex_buffer>(vertices, sizeof(vertices));
-
-    vao.add_vbo(vbo);
-    
+    vertex_buffer vbo(vertices, sizeof(vertices));
+    vao.add_vbo(std::make_shared<vertex_buffer>(vbo));
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     
     glClearColor(0.3f, 0.8f, 0.9f, 1.0f);
     while (!glfwWindowShouldClose(window.get_handle())) {
-
         glClear(GL_COLOR_BUFFER_BIT);
 
         basic_shader.bind();
